@@ -1,13 +1,44 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Example App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogApp</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
 </head>
 <body>
+    <div class="nav-bar">
+        <div class="nav-wrapper">
+            <a href="/" class="logo">Log<span>App</span></a>
+            <img src="images/user-img.svg" class="no-close" id="user-pic" />
+            <div id="user-info-signed" class="user-info hidden no-close">
+                <div class="container no-close">
+                    <label for="menu-user" class="no-close">Uporabnik:</label>
+                    <span id="menu-user" class="no-close"></span>
+                    <br />
+                    <label for="menu-id" class="no-close">ID:</label>
+                    <span id="menu-id" class="no-close"></span>
 
-    {{{body}}}
+                    <a class="user-info-spremeni no-close" href="/Logiranje/Prijava">Spremeni</a>
+                </div>
+            </div>
+            <div id="user-info-unsigned" class="user-info hidden no-close">
+                <div class="container no-close">
+                    <span id="menu-user" class="no-close">Uporabnik ni prijavljen!</span>
 
+                    <a class="user-info-spremeni no-close" href="/Logiranje/Prijava">Prijava</a>
+                </div>
+            </div>
+            <div class="box-arrow arrow-left hidden" id="arrow-left"></div>
+            <div class="box-arrow arrow-right hidden" id="arrow-right"></div>
+        </div>
+    </div>
+    <div>
+        <div class="wrapper">
+            {{{ body }}}
+        </div>
+    </div>
 </body>
 </html>

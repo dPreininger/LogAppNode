@@ -7,6 +7,7 @@ const port = 8080;
 server.engine('.hbs', exphbs({extname: '.hbs'}));
 server.set('view engine', '.hbs');
 
+server.use(express.static(path.join(__dirname, 'static')));
 
 server.get('/', (req, res) => {
     res.render('domov');
