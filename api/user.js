@@ -6,11 +6,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 
 const jsonParser = bodyParser.json();
+const formParser = bodyParser.urlencoded();
 
 // import all functions for database
 const db = require('../services/databaseService.mjs');
 
-router.post('/generate', jsonParser, userGenerate);
+router.post('/generate', formParser, userGenerate);
 
 router.post('/', jsonParser, postUserFull);
 

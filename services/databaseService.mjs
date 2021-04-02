@@ -44,12 +44,12 @@ const postUser = (req, res, id) => {
   con.query(query, [id, req.body.name, req.body.lastName], (err, result) => {
     if(err) throw err;
     else {
-        let data = {
-          idUsers: id,
-          name: req.body.name,
-          lastName: req.body.lastName
-        }
-        res.send(data);
+      let data = {
+        idUsers: id,
+        name: req.body.name,
+        lastName: req.body.lastName
+      }
+      res.json(data);
     }
   })
 }

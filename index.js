@@ -15,9 +15,12 @@ server.use(express.static(path.join(__dirname, 'static')));
 server.use('/api', apiRouter);
 
 server.get('/', (req, res) => {
-    res.render('domov', );
+    res.render('domov');
 })
 
+server.get('/prijava', (req, res) => {
+    res.render('prijava');
+})
 
 // start server
 server.listen(port, () => {

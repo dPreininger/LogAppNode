@@ -10,7 +10,7 @@ function getUserName(id) {
         success: function (data) {
             let d = new Date();
             d.setTime(d.getTime() + (3650 * 24 * 60 * 60 * 1000));
-            document.cookie = "UserName=" + data["Name"] + " " + data["LastName"] + "; expires=" + d + "; path=/";
+            document.cookie = "UserName=" + data["name"] + " " + data["lastName"] + "; expires=" + d + "; path=/";
         }
     });
 }
@@ -27,7 +27,8 @@ function getUserNameAndId(id) {
             if (data) {
                 let d = new Date();
                 d.setTime(d.getTime() + (3650 * 24 * 60 * 60 * 1000));
-                document.cookie = "UserName=" + data["Name"] + " " + data["LastName"] + "; expires=" + d + "; path=/";
+                console.log(data);
+                document.cookie = "UserName=" + data.name + " " + data.lastName + "; expires=" + d + "; path=/";
                 document.cookie = "UserId=" + id + "; expires=" + d + "; path=/";
 
 
@@ -98,13 +99,14 @@ $(document).ready(function() {
         if (name.length == 0 || lastName.length == 0) {
             alert("Vpisite ime in priimek!");
         } else {
-    
+
             let obj = {
-                "Name": name,
-                "LastName": lastName
+                name: name,
+                lastName: lastName
             }
     
-    
+            console.log(obj);
+
             let url = "/api/user/generate";
     
             let id;
@@ -116,8 +118,8 @@ $(document).ready(function() {
                 success: function (data) {
                     let d = new Date();
                     d.setTime(d.getTime() + (3650 * 24 * 60 * 60 * 1000));
-                    document.cookie = "UserId=" + data["IdUsers"] + "; expires=" + d + "; path=/";
-                    document.cookie = "UserName=" + data["Name"] + " " + data["LastName"] + "; expires=" + d + "; path=/";
+                    document.cookie = "UserId=" + data["idUsers"] + "; expires=" + d + "; path=/";
+                    document.cookie = "UserName=" + data["name"] + " " + data["lastName"] + "; expires=" + d + "; path=/";
     
                     let odmik = document.cookie.indexOf("LocationId") + 11;
                     // odmik je 10, ker zgornja funkcije vrne -1 in na koncu dodamo 11
