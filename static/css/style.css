@@ -1,0 +1,278 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+:root {
+    --bg-color: #EEE2DF;
+    --lighter-color: #EED7C5;
+    --main-color: #AF726E;
+    --dark-color: #C97C5D;
+    --darkest-color: #542D27;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+.nav-bar {
+    background-color: white;
+    font-size: 1.2em;
+    padding: 0.7em;
+}
+
+    .nav-bar .nav-wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        place-content: space-between;
+    }
+
+    .nav-bar img {
+        height: 2.5em;
+        cursor: pointer;
+    }
+
+    .nav-bar .logo {
+        font-weight: bold;
+        color: black;
+        border-color: var(--dark-color);
+        border-style: solid;
+        border-radius: 5em;
+        padding: 0.3em;
+        border-width: 4px;
+    }
+
+        .nav-bar .logo span {
+            color: var(--dark-color);
+        }
+
+.hero {
+    padding: 2em;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    text-align: center;
+}
+
+    .hero p {
+        color: var(--main-color);
+        font-size: 0.8em;
+    }
+
+.about {
+    background-color: var(--dark-color);
+    padding: 2em;
+    border-radius: 1em;
+    margin: 1em;
+}
+
+.uporaba {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.user-info {
+    background-color: white;
+    position: absolute;
+    z-index: 9999;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    width: 250px;
+    right: -5px;
+    top: 57px;
+    height: 150px;
+    border-radius: 1em;
+}
+
+    .user-info .container {
+        padding: 0.5em;
+        font-size: 0.9em;
+    }
+
+        .user-info .container label {
+            display: block;
+        }
+
+        .user-info .container span {
+            display: block;
+        }
+
+        .user-info .container .user-info-spremeni {
+            position: absolute;
+            right: 1em;
+            bottom: 0.5em;
+        }
+
+.hidden {
+    display: none;
+}
+
+.wrapper {
+    max-width: 800px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav-wrapper {
+    position: relative;
+    max-width: 800px;
+    display: block;
+    margin: 0 auto;
+}
+
+.box-arrow {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: white;
+    border-top: black;
+    border-style: solid;
+    border-width: 1px;
+    top: 52px;
+    z-index: 10999;
+}
+
+.arrow-left {
+    -webkit-transform: skew(0, -45deg);
+    transform: skew(0, -45deg);
+    right: 22px;
+}
+
+.arrow-right {
+    -webkit-transform: skew(0, 45deg);
+    transform: skew(0, 45deg);
+    right: 11px;
+}
+
+.centered-content {
+    text-align: center;
+}
+
+.std-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 2.7em;
+    border-radius: 5em;
+    border: 1px solid;
+    height: 3em;
+    width: 70%;
+    max-width: 300px;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: var(--main-color);
+    color: white;
+}
+
+hr {
+    margin-left: 1em;
+    margin-right: 1em;
+    border: 3px solid var(--dark-color);
+    border-radius: 5em;
+    margin-bottom: 4em;
+}
+
+.std-label {
+    margin: 0 auto;
+    display: block;
+    margin-top: 2.7em;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 5em;
+    background-color: var(--main-color);
+    width: 70%;
+    max-width: 300px;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    color: white;
+    text-align: center;
+}
+
+.content-box {
+    background-color: var(--main-color);
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 1em;
+    padding: 1em;
+    padding-top: 0;
+    width: 70%;
+    margin-bottom: 4em;
+}
+
+.padded-top {
+    padding-top: 0.1em;
+}
+
+.item-box {
+    background-color: var(--lighter-color);
+    border-radius: 1em;
+    margin-bottom: 1em;
+}
+
+    .item-box p {
+        font-size: 0.9em;
+        padding: 0.7em;
+    }
+
+.std-label-borderless {
+    margin: 0 auto;
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: var(--main-color);
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    color: white;
+}
+
+.box-input {
+    margin: 0 auto;
+    background-color: inherit;
+    border-radius: inherit;
+    width: 90%;
+    border: none;
+    text-align: center;
+    font-size: 0.95em;
+    outline: none;
+}
+
+.dark-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 2.7em;
+    border-radius: 5em;
+    border: 1px solid;
+    height: 3em;
+    width: 70%;
+    max-width: 300px;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: var(--darkest-color);
+    border-color: var(--darkest-color);
+    color: white;
+}
+
+.hr-short {
+    margin: 0 auto;
+    margin-bottom: 4em;
+    width: 30px;
+}
+
+#odjava-cta-div {
+    margin: 0 auto;
+    margin-bottom: 4em;
+    max-width: 300px;
+    width: 70%;
+}
+
+
+/*# sourceMappingURL=style.css.map */
