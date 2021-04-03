@@ -40,7 +40,7 @@ function getUserNameAndId(id) {
                     odmik = locationId.indexOf(";");
                     if (odmik != -1) locationId = locationId.substring(0, odmik);
 
-                    window.location.href = "/logiranje/dodaj/" + locationId;
+                    window.location.href = "/dodaj/" + locationId;
                 }
             } else {
                 alert("ID ne obstatja!");
@@ -80,7 +80,7 @@ function odhod(idRazlog) {
         url: url,
         data: obj,
         success: function (data) {
-            window.location.href = '/logiranje/uspeh'
+            window.location.href = '/uspeh'
         },
         error: function(err) {
             alert("Prislo je do napake, poskusite ponovno!");

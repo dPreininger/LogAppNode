@@ -70,17 +70,35 @@ const getUser = (req, res) => {
 }
 
 const postUserFull = (req, res) => {
-  let query = "INSERT INTO users (idUsers, name, lastName) " +
-    "VALUES (?, ?, ?)";
+  let query = 'INSERT INTO users (idUsers, name, lastName) ' +
+    'VALUES (?, ?, ?)';
 
   con.query(query, [req.body.idUsers, req.body.name, req.body.lastName], (err, result) => {
     if(err) throw err;
-    else res.send("OK!");
+    else res.send('OK!');
   })
-} 
+}
+
+const getLastLog = (userId, locationId, callback) => {
+  let query = 'SELECT * FROM logs WHERE idUsers = ? AND idLocations = ? ORDER BY logTime DESC LIMIT 1;';
+
+  con.query(query, [userId, locationId], (err, result) => {
+    if(err) throw err;
+    callback(err, result);
+  })
+}
+
+const postLog = (obj) => {
+  let query = 'INSERT INTO logs (idLocations, idUsers, logTime, idLogType) ' +
+    'VALUES (?, ?, ?, ?)';
+
+  con.query(query, [obj.idLocations, obj.idUsers, obj.logTime, obj.idLogType]);
+}
 
 module.exports = {
   userGenerate: userGenerate,
   postUserFull: postUserFull,
-  getUser: getUser
+  getUser: getUser,
+  getLastLog: getLastLog,
+  postLog: postLog
 };
