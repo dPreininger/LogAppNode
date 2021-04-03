@@ -44,16 +44,38 @@ server.get('/dodaj/:locationId', (req, res) => {
 
                 postLog(logObj);
                 // porihtaj, da view pise prihod in pohandlaj view
+                res.send('ok');
 
             } else {
                 res.cookie('LocationId', req.params.locationId);
-                console.log('redirect na odhod');
-                // pohendlaj
+                res.redirect('/odhod');
             }
-            res.send('ok');
         })
     } else {
         res.cookie('LocationId', req.params.locationId);
+        res.redirect('/prijava');
+    }
+})
+
+server.get('/odhod', (req, res) => {
+    if(req.cookies.UserId) {
+        if(req.cookies.LocationId) {
+            let userId = req.cookies.UserId;
+            let locationId = req.cookies.LocationId;
+            
+            getLastLog(userId, locationId, function(err, result) {
+                if(result.length === 0 || result[0].idLogType != 0) {
+                    res.redirect('/dodaj/' + locationId);
+                } else {
+                    res.send('odhod page');
+                }
+            })
+
+        } else {
+            console.log('napaka - ni location id');
+            res.redirect('/');
+        }
+    } else {
         res.redirect('/prijava');
     }
 })
