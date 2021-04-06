@@ -44,7 +44,7 @@ server.get('/dodaj/:locationId', (req, res) => {
 
                 postLog(logObj);
                 // porihtaj, da view pise prihod in pohandlaj view
-                res.send('ok');
+                res.redirect('uspeh');
 
             } else {
                 res.cookie('LocationId', req.params.locationId);
@@ -67,7 +67,7 @@ server.get('/odhod', (req, res) => {
                 if(result.length === 0 || result[0].idLogType != 0) {
                     res.redirect('/dodaj/' + locationId);
                 } else {
-                    res.send('odhod page');
+                    res.render('odhod');
                 }
             })
 
@@ -78,6 +78,33 @@ server.get('/odhod', (req, res) => {
     } else {
         res.redirect('/prijava');
     }
+})
+
+server.get('/uspeh', (req, res) => {
+    /*
+    HttpCookie hc = new HttpCookie("LocationId");
+            hc.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(hc);
+
+            string tip = (string)TempData["tip"];
+            if (tip == null) return RedirectToAction("Index", "Domov");
+            
+            ViewBag.Tip = tip;
+
+            // mogoce ni najboljse
+            User user = DatabaseService.GetUsers(Int32.Parse(Request.Cookies["UserId"].Value))[0];
+            ViewBag.Ime = user.Name;
+            ViewBag.Priimek = user.LastName;
+            ViewBag.Id = user.IdUsers;
+
+            return View();
+
+    */
+    res.clearCookie('LocationID');
+    res.send('ok');
+
+
+
 })
 
 // start server

@@ -68,9 +68,9 @@ function odhod(idRazlog) {
     console.log(locationId);
 
     let obj = {
-        "IdUsers": userId,
-        "IdLocations": locationId,
-        "IdLogType": idRazlog
+        "idUsers": userId,
+        "idLocations": locationId,
+        "idLogType": idRazlog
     }
 
     let url = "/api/log";
