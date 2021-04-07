@@ -27,7 +27,6 @@ function getUserNameAndId(id) {
             if (data) {
                 let d = new Date();
                 d.setTime(d.getTime() + (3650 * 24 * 60 * 60 * 1000));
-                console.log(data);
                 document.cookie = "UserName=" + data.name + " " + data.lastName + "; expires=" + d + "; path=/";
                 document.cookie = "UserId=" + id + "; expires=" + d + "; path=/";
 
@@ -52,7 +51,6 @@ function getUserNameAndId(id) {
 
 
 function odhod(idRazlog) {
-
     let odmik = document.cookie.indexOf("UserId") + 7;
     let userId = document.cookie.substring(odmik);
     odmik = userId.indexOf(";");
@@ -64,8 +62,6 @@ function odhod(idRazlog) {
     odmik = locationId.indexOf(";");
     if (odmik != -1) locationId = locationId.substring(0, odmik);
 
-    console.log(userId);
-    console.log(locationId);
 
     let obj = {
         "idUsers": userId,
@@ -104,8 +100,7 @@ $(document).ready(function() {
                 name: name,
                 lastName: lastName
             }
-    
-            console.log(obj);
+
 
             let url = "/api/user/generate";
     

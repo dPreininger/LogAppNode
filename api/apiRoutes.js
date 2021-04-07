@@ -23,8 +23,11 @@ router.post('/log', formParser, (req, res) => {
         logTime: d
     }
 
-    postLog(obj);
-    res.send('ok');
+    postLog(obj, (err, result) => {
+        if(err) throw err;
+        res.send('ok');
+    });
+
 })
 
 module.exports = router;

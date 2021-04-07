@@ -3,7 +3,11 @@ const server = express();
 const path = require('path');
 const exphbs  = require('express-handlebars');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
 const port = 8080;
+const secret = 'secret1234';
+
 const { getLastLog } = require('./services/databaseService.mjs');
 const { postLog } = require('./services/databaseService.mjs');
 
@@ -14,9 +18,9 @@ server.engine('.hbs', exphbs({extname: '.hbs'}));
 server.set('view engine', '.hbs');
 
 server.use(express.static(path.join(__dirname, 'static')));
-
 server.use(cookieParser());
-
+server.use(session({secret: secret}));
+server.use(flash());
 server.use('/api', apiRouter);
 
 server.get('/', (req, res) => {
@@ -28,31 +32,33 @@ server.get('/prijava', (req, res) => {
 })
 
 server.get('/dodaj/:locationId', (req, res) => {
+    let locationId = req.params.locationId;
     if(req.cookies.UserId) {
         let userId = req.cookies.UserId;
-        getLastLog(userId, req.params.locationId, function(err, result) {
-            console.log(result);
+        getLastLog(userId, locationId, (err, result) => {
             if(result.length === 0 || result[0].idLogType != 0) {
                 let d = new Date();
                 d.setTime(d.getTime())
                 logObj = {
                     idUsers: userId,
-                    idLocations: req.params.locationId,
+                    idLocations: locationId,
                     idLogType: 0,
                     logTime: d
                 }
 
-                postLog(logObj);
-                // porihtaj, da view pise prihod in pohandlaj view
-                res.redirect('uspeh');
+                postLog(logObj, (err, result) => {
+                    if(err) throw err;
+                    req.flash('tip', 'Prihod');
+                    res.redirect('/uspeh');
+                });
 
             } else {
-                res.cookie('LocationId', req.params.locationId);
+                res.cookie('LocationId', locationId);
                 res.redirect('/odhod');
             }
         })
     } else {
-        res.cookie('LocationId', req.params.locationId);
+        res.cookie('LocationId', locationId);
         res.redirect('/prijava');
     }
 })
@@ -67,6 +73,7 @@ server.get('/odhod', (req, res) => {
                 if(result.length === 0 || result[0].idLogType != 0) {
                     res.redirect('/dodaj/' + locationId);
                 } else {
+                    req.flash('tip', 'odhod');
                     res.render('odhod');
                 }
             })
@@ -100,10 +107,15 @@ server.get('/uspeh', (req, res) => {
             return View();
 
     */
-    res.clearCookie('LocationID');
-    res.send('ok');
+    let flashData = req.flash('tip');
 
-
+    if(flashData.length === 0) {
+        res.redirect('/');
+    } else {
+        res.clearCookie('LocationId');
+        res.send(flashData);
+        // res.render()
+    }
 
 })
 

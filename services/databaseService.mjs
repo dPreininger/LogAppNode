@@ -88,11 +88,13 @@ const getLastLog = (userId, locationId, callback) => {
   })
 }
 
-const postLog = (obj) => {
+const postLog = (obj, callback) => {
   let query = 'INSERT INTO logs (idLocations, idUsers, logTime, idLogType) ' +
     'VALUES (?, ?, ?, ?)';
 
-  con.query(query, [obj.idLocations, obj.idUsers, obj.logTime, obj.idLogType]);
+  con.query(query, [obj.idLocations, obj.idUsers, obj.logTime, obj.idLogType], (err, result) => {
+    callback(err, result);
+  });
 }
 
 module.exports = {
