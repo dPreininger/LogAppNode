@@ -69,6 +69,16 @@ const getUser = (req, res) => {
   })
 }
 
+const getUserData = (id, callback) => {
+  let query = 'SELECT * FROM users WHERE idUsers = ?';
+  con.query(query, [id], (err, result) => {
+    if(err) throw err;
+    else {
+      callback(err, result);
+    }
+  }) 
+}
+
 const postUserFull = (req, res) => {
   let query = 'INSERT INTO users (idUsers, name, lastName) ' +
     'VALUES (?, ?, ?)';
@@ -102,5 +112,6 @@ module.exports = {
   postUserFull: postUserFull,
   getUser: getUser,
   getLastLog: getLastLog,
-  postLog: postLog
+  postLog: postLog,
+  getUserData: getUserData
 };

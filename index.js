@@ -10,6 +10,7 @@ const secret = 'secret1234';
 
 const { getLastLog } = require('./services/databaseService.mjs');
 const { postLog } = require('./services/databaseService.mjs');
+const { getUserData } = require('./services/databaseService.mjs');
 
 // routes
 const apiRouter = require("./api/apiRoutes");
@@ -88,33 +89,20 @@ server.get('/odhod', (req, res) => {
 })
 
 server.get('/uspeh', (req, res) => {
-    /*
-    HttpCookie hc = new HttpCookie("LocationId");
-            hc.Expires = DateTime.Now.AddDays(-1);
-            Response.Cookies.Add(hc);
-
-            string tip = (string)TempData["tip"];
-            if (tip == null) return RedirectToAction("Index", "Domov");
-            
-            ViewBag.Tip = tip;
-
-            // mogoce ni najboljse
-            User user = DatabaseService.GetUsers(Int32.Parse(Request.Cookies["UserId"].Value))[0];
-            ViewBag.Ime = user.Name;
-            ViewBag.Priimek = user.LastName;
-            ViewBag.Id = user.IdUsers;
-
-            return View();
-
-    */
     let flashData = req.flash('tip');
 
     if(flashData.length === 0) {
         res.redirect('/');
     } else {
         res.clearCookie('LocationId');
-        res.send(flashData);
-        // res.render()
+        getUserData(req.cookies.UserId, (err, result) => {
+            res.render('uspeh', {
+                tip: flashData,
+                ime: result[0].name,
+                priimek: result[0].lastName,
+                id: result[0].idUsers
+            })
+        })
     }
 
 })
